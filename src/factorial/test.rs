@@ -4,7 +4,7 @@ mod from_permutation {
     use super::*;
 
     fn result(vec: Vec<u64>) -> Vec<u64> {
-        Factorial::from_permutation(vec).digits
+        Factorial::from_permutation(vec).vec
     }
 
     #[test]
