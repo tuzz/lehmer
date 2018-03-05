@@ -1,0 +1,6 @@
+[package]
+name = "lehmer"
+version = "0.1.0"
+authors = ["Chris Patuzzo <chris@patuzzo.co.uk>"]
+
+[dependencies]
