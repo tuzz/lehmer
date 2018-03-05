@@ -1,11 +1,13 @@
 use super::*;
 
+type Subject = BitString;
+
 mod new {
     use super::*;
 
     #[test]
     fn it_is_initialized_to_zero() {
-        let subject = BitString::new();
+        let subject = Subject::new();
         assert_eq!(subject.b, 0);
     }
 }
@@ -15,7 +17,7 @@ mod set {
 
     #[test]
     fn it_sets_the_nth_bit() {
-        let mut subject = BitString::new();
+        let mut subject = Subject::new();
 
         subject.set(0);
         assert_eq!(1, subject.b);
@@ -30,7 +32,7 @@ mod set {
     #[test]
     #[should_panic]
     fn it_panics_if_n_is_out_of_bounds() {
-        let mut subject = BitString::new();
+        let mut subject = Subject::new();
         subject.set(64);
     }
 }
@@ -40,7 +42,7 @@ mod count_until {
 
     #[test]
     fn it_counts_the_number_of_set_bits_until_the_nth_bit() {
-        let mut subject = BitString::new();
+        let mut subject = Subject::new();
 
         subject.set(1);
         subject.set(3);
@@ -56,7 +58,7 @@ mod count_until {
     #[test]
     #[should_panic]
     fn it_panics_if_n_is_out_of_bounds() {
-        let subject = BitString::new();
+        let subject = Subject::new();
         subject.count_until(65);
     }
 }
