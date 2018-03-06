@@ -20,7 +20,7 @@ mod from_permutation {
     }
 
     #[test]
-    fn it_maps_a_permutation_to_its_representation_in_factorial_base() {
+    fn it_maps_a_permutation_to_its_lehmer_code() {
         assert_eq!(result(vec![0, 1, 2]), vec![0, 0, 0]);
         assert_eq!(result(vec![0, 2, 1]), vec![0, 1, 0]);
         assert_eq!(result(vec![1, 0, 2]), vec![1, 0, 0]);
@@ -43,7 +43,7 @@ mod from_decimal {
     }
 
     #[test]
-    fn it_maps_a_decimal_number_to_its_representation_in_factorial_base() {
+    fn it_maps_a_decimal_number_to_its_lehmer_code() {
         assert_eq!(result(0, 3), vec![0, 0, 0]);
         assert_eq!(result(1, 3), vec![0, 1, 0]);
         assert_eq!(result(2, 3), vec![1, 0, 0]);
@@ -58,6 +58,24 @@ mod from_decimal {
     }
 }
 
+mod to_permutation {
+    use super::*;
+
+    fn result(vec: Vec<u64>) -> Vec<u64> {
+        Subject::new(vec).to_permutation()
+    }
+
+    #[test]
+    fn it_maps_a_lehmer_code_to_its_permutation() {
+        assert_eq!(result(vec![0, 0, 0]), vec![0, 1, 2]);
+        assert_eq!(result(vec![0, 1, 0]), vec![0, 2, 1]);
+        assert_eq!(result(vec![1, 0, 0]), vec![1, 0, 2]);
+        assert_eq!(result(vec![1, 1, 0]), vec![1, 2, 0]);
+        assert_eq!(result(vec![2, 0, 0]), vec![2, 0, 1]);
+        assert_eq!(result(vec![2, 1, 0]), vec![2, 1, 0]);
+    }
+}
+
 mod to_decimal {
     use super::*;
 
@@ -66,7 +84,7 @@ mod to_decimal {
     }
 
     #[test]
-    fn it_maps_a_number_in_factorial_base_to_its_decimal_representation() {
+    fn it_maps_a_lehmer_code_to_its_decimal_number() {
         assert_eq!(result(vec![0, 0, 0]), 0);
         assert_eq!(result(vec![0, 1, 0]), 1);
         assert_eq!(result(vec![1, 0, 0]), 2);

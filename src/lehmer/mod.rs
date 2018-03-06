@@ -35,6 +35,20 @@ impl Lehmer {
         Self::new(vec)
     }
 
+    fn to_permutation(self) -> Vec<u64> {
+        let n = self.vec.len() as u64;
+
+        let mut sequence: Vec<u64> = (0..n).collect();
+        let mut permutation: Vec<u64> = Vec::with_capacity(n as usize);
+
+        for digit in self.vec {
+            let element = sequence.remove(digit as usize);
+            permutation.push(element);
+        }
+
+        permutation
+    }
+
     fn to_decimal(self) -> u64 {
         let mut product: u64 = 1;
         let mut decimal: u64 = 0;
