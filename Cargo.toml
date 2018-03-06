@@ -2,6 +2,7 @@
 name = "lehmer"
 version = "0.1.0"
 authors = ["Chris Patuzzo <chris@patuzzo.co.uk>"]
+license = "MIT"
 
 [dev-dependencies]
 bencher = "0.1.5"
