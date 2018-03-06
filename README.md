@@ -41,11 +41,10 @@ representations are less than or equal to `<u64>::max_value()`. Rust will
 `panic` for larger values.
 
 Additionally, permutations must be vectors containing sequential integers
-starting from 0 (in any order), e.g. [1, 0, 4, 3, 2]. Lehmer will either `panic`
-or produce incorrect results for other vectors.
+starting from 0 (in any order), e.g. `[1, 0, 4, 3, 2]`. Lehmer will either
+`panic` or produce incorrect results for other vectors.
 
-Note: The above conditions still mean Lehmer is safe as per
-[Rust's definitions](https://doc.rust-lang.org/beta/nomicon/exception-safety.html).
+Note: The above conditions still mean Lehmer is safe as per Rust's definitions.
 It doesn't use any `unsafe` features and memory remains consistent in the case
 of a `panic`.
 
@@ -64,7 +63,7 @@ e.g. `Lehmer::from_permutation` runs at ~13 million iterations per second.
 
 ### Tests
 
-Tests can be run with `cargo test`. Units tests are in files next to their
+Tests can be run with `cargo test`. Unit tests are in files next to their
 modules and integration tests are in `tests/`.
 
 ### Contributions
