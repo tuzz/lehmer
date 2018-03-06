@@ -33,6 +33,11 @@ mod from_permutation {
     fn it_works_for_the_trivial_case() {
         assert_eq!(result(vec![0]), vec![0]);
     }
+
+    #[test]
+    fn it_works_for_a_complicated_case() {
+        assert_eq!(result(vec![1, 0, 4, 3, 2]), vec![1, 0, 2, 1, 0]);
+    }
 }
 
 mod from_decimal {
@@ -56,6 +61,11 @@ mod from_decimal {
     fn it_works_for_the_trivial_case() {
         assert_eq!(result(0, 1), vec![0]);
     }
+
+    #[test]
+    fn it_works_for_a_complicated_case() {
+        assert_eq!(result(29, 5), vec![1, 0, 2, 1, 0]);
+    }
 }
 
 mod to_permutation {
@@ -73,6 +83,16 @@ mod to_permutation {
         assert_eq!(result(vec![1, 1, 0]), vec![1, 2, 0]);
         assert_eq!(result(vec![2, 0, 0]), vec![2, 0, 1]);
         assert_eq!(result(vec![2, 1, 0]), vec![2, 1, 0]);
+    }
+
+    #[test]
+    fn it_works_for_the_trivial_case() {
+        assert_eq!(result(vec![0]), vec![0]);
+    }
+
+    #[test]
+    fn it_works_for_a_complicated_case() {
+        assert_eq!(result(vec![1, 0, 2, 1, 0]), vec![1, 0, 4, 3, 2]);
     }
 }
 
@@ -96,5 +116,10 @@ mod to_decimal {
     #[test]
     fn it_works_for_the_trivial_case() {
         assert_eq!(result(vec![0]), 0);
+    }
+
+    #[test]
+    fn it_works_for_a_complicated_case() {
+        assert_eq!(result(vec![1, 0, 2, 1, 0]), 29);
     }
 }

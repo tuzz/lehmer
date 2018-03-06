@@ -22,16 +22,21 @@ impl Lehmer {
         Self::new(vec)
     }
 
-    fn from_decimal(mut decimal: u64, n: usize) -> Self {
+    fn from_decimal(decimal: u64, n: usize) -> Self {
         let mut vec: Vec<u64> = Vec::with_capacity(n);
-        let mut product: u64 = 1;
-
         vec.resize(n, 0);
 
-        for (iteration, index) in (1..n).zip((0..n-1).rev()) {
-            product *= iteration as u64;
-            decimal /= product;
-            vec[index] = decimal % (iteration as u64 + 1);
+        let mut product: u64 = 1;
+        let mut iteration: u64 = 1;
+
+        for index in (0..n-1).rev() {
+            product *= iteration;
+            iteration += 1;
+
+            let divisor = decimal / product;
+            let remainder = divisor % iteration;
+
+            vec[index] = remainder;
         }
 
         Self::new(vec)
