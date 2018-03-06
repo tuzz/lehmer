@@ -3,6 +3,10 @@ name = "lehmer"
 description = "Convert between permutation vectors, Lehmer codes and decimals."
 version = "1.0.0"
 authors = ["Chris Patuzzo <chris@patuzzo.co.uk>"]
+documentation = "https://github.com/tuzz/lehmer"
+homepage = "https://github.com/tuzz/lehmer"
+repository = "https://github.com/tuzz/lehmer"
+readme = "README.md"
 license = "MIT"
 
 [dev-dependencies]
