@@ -2,16 +2,12 @@ mod bit_string;
 
 use bit_string::BitString;
 
-struct Lehmer {
-    vec: Vec<u64>,
+pub struct Lehmer {
+    pub code: Vec<u64>,
 }
 
 impl Lehmer {
-    fn new(vec: Vec<u64>) -> Self {
-        Self { vec }
-    }
-
-    fn from_permutation(mut vec: Vec<u64>) -> Self {
+    pub fn from_permutation(mut vec: Vec<u64>) -> Self {
         let mut bit_string = BitString::new();
 
         for k in &mut vec {
@@ -19,12 +15,12 @@ impl Lehmer {
             *k -= bit_string.count_until(*k);
         }
 
-        Self::new(vec)
+        Self { code: vec }
     }
 
-    fn from_decimal(decimal: u64, n: usize) -> Self {
-        let mut vec: Vec<u64> = Vec::with_capacity(n);
-        vec.resize(n, 0);
+    pub fn from_decimal(decimal: u64, n: usize) -> Self {
+        let mut code: Vec<u64> = Vec::with_capacity(n);
+        code.resize(n, 0);
 
         let mut product: u64 = 1;
         let mut iteration: u64 = 1;
@@ -36,28 +32,28 @@ impl Lehmer {
             let divisor = decimal / product;
             let remainder = divisor % iteration;
 
-            vec[index] = remainder;
+            code[index] = remainder;
         }
 
-        Self::new(vec)
+        Self { code }
     }
 
-    fn to_permutation(mut self) -> Vec<u64> {
-        let n = self.vec.len() as u64;
+    pub fn to_permutation(mut self) -> Vec<u64> {
+        let n = self.code.len() as u64;
         let mut sequence: Vec<u64> = (0..n).collect();
 
-        for d in &mut self.vec {
+        for d in &mut self.code {
             *d = sequence.remove(*d as usize);
         }
 
-        self.vec
+        self.code
     }
 
-    fn to_decimal(self) -> u64 {
+    pub fn to_decimal(self) -> u64 {
         let mut product: u64 = 1;
         let mut decimal: u64 = 0;
 
-        for (i, d) in self.vec.iter().rev().enumerate().skip(1) {
+        for (i, d) in self.code.iter().rev().enumerate().skip(1) {
             product *= i as u64;
             decimal += d * product;
         }

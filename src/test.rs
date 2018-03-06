@@ -2,21 +2,11 @@ use super::*;
 
 type Subject = Lehmer;
 
-mod new {
-    use super::*;
-
-    #[test]
-    fn it_is_initialized_from_the_vector() {
-        let subject = Subject::new(vec![0, 1, 2]);
-        assert_eq!(subject.vec, vec![0, 1, 2]);
-    }
-}
-
 mod from_permutation {
     use super::*;
 
     fn result(vec: Vec<u64>) -> Vec<u64> {
-        Subject::from_permutation(vec).vec
+        Subject::from_permutation(vec).code
     }
 
     #[test]
@@ -44,7 +34,7 @@ mod from_decimal {
     use super::*;
 
     fn result(decimal: u64, n: usize) -> Vec<u64> {
-        Subject::from_decimal(decimal, n).vec
+        Subject::from_decimal(decimal, n).code
     }
 
     #[test]
@@ -71,8 +61,8 @@ mod from_decimal {
 mod to_permutation {
     use super::*;
 
-    fn result(vec: Vec<u64>) -> Vec<u64> {
-        Subject::new(vec).to_permutation()
+    fn result(code: Vec<u64>) -> Vec<u64> {
+        Subject { code }.to_permutation()
     }
 
     #[test]
@@ -99,8 +89,8 @@ mod to_permutation {
 mod to_decimal {
     use super::*;
 
-    fn result(vec: Vec<u64>) -> u64 {
-        Subject::new(vec).to_decimal()
+    fn result(code: Vec<u64>) -> u64 {
+        Subject { code }.to_decimal()
     }
 
     #[test]
