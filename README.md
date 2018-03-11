@@ -1,5 +1,7 @@
 ## Lehmer
 
+![Travis](https://travis-ci.org/tuzz/lehmer.svg?branch=master)
+
 Lehmer is a
 [Rust crate](https://crates.io/crates/lehmer)
 for converting between permutation vectors,
