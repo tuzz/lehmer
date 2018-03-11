@@ -17,7 +17,7 @@ impl BitString {
         let bits_to_ignore = 64 - n;
         let remaining_bits = self.b << bits_to_ignore;
 
-        remaining_bits.count_ones() as u64
+        u64::from(remaining_bits.count_ones())
     }
 }
 
