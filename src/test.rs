@@ -113,3 +113,23 @@ mod to_decimal {
         assert_eq!(result(vec![1, 0, 2, 1, 0]), 29);
     }
 }
+
+mod max_value {
+    use super::*;
+
+    #[test]
+    fn it_returns_the_maximum_decimal_for_a_permutation_of_n_items() {
+        assert_eq!(Subject::max_value(0), 0);
+        assert_eq!(Subject::max_value(1), 0);
+        assert_eq!(Subject::max_value(2), 1);
+        assert_eq!(Subject::max_value(3), 5);
+        assert_eq!(Subject::max_value(4), 23);
+        assert_eq!(Subject::max_value(5), 119);
+
+        let max = Subject::max_value(5);
+        let code = Lehmer::from_decimal(max, 5);
+        let permutation = code.to_permutation();
+
+        assert_eq!(permutation, vec![4, 3, 2, 1, 0]);
+    }
+}

@@ -31,12 +31,19 @@ fn benchmark_to_decimal(bench: &mut Bencher) {
     })
 }
 
+fn benchmark_max_value(bench: &mut Bencher) {
+    bench.iter(|| {
+        Lehmer::max_value(10)
+    })
+}
+
 benchmark_group!(
     benches,
     benchmark_from_permutation,
     benchmark_from_decimal,
     benchmark_to_permutation,
     benchmark_to_decimal,
+    benchmark_max_value,
 );
 
 benchmark_main!(benches);

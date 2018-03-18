@@ -60,6 +60,16 @@ impl Lehmer {
 
         decimal
     }
+
+    pub fn max_value(n: usize) -> u64 {
+        let mut product: u64 = 1;
+
+        for i in (0..n+1).skip(1) {
+            product *= i as u64;
+        }
+
+        product - 1
+    }
 }
 
 #[cfg(test)]
