@@ -5,7 +5,7 @@ type Subject = Lehmer;
 mod from_permutation {
     use super::*;
 
-    fn result(vec: Vec<u64>) -> Vec<u64> {
+    fn result(vec: Vec<u8>) -> Vec<u8> {
         Subject::from_permutation(vec).code
     }
 
@@ -33,7 +33,7 @@ mod from_permutation {
 mod from_decimal {
     use super::*;
 
-    fn result(decimal: u64, n: usize) -> Vec<u64> {
+    fn result(decimal: u64, n: usize) -> Vec<u8> {
         Subject::from_decimal(decimal, n).code
     }
 
@@ -61,7 +61,7 @@ mod from_decimal {
 mod to_permutation {
     use super::*;
 
-    fn result(code: Vec<u64>) -> Vec<u64> {
+    fn result(code: Vec<u8>) -> Vec<u8> {
         Subject { code }.to_permutation()
     }
 
@@ -89,7 +89,7 @@ mod to_permutation {
 mod to_decimal {
     use super::*;
 
-    fn result(code: Vec<u64>) -> u64 {
+    fn result(code: Vec<u8>) -> u64 {
         Subject { code }.to_decimal()
     }
 

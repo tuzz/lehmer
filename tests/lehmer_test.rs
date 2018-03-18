@@ -26,7 +26,7 @@ fn it_can_convert_between_permutations_lehmer_codes_and_decimals() {
     );
 }
 
-fn assert_example(permutation: &[u64], code: &[u64], decimal: u64) {
+fn assert_example(permutation: &[u8], code: &[u8], decimal: u64) {
     let mut lehmer: Lehmer;
     let clone = permutation.to_owned();
 

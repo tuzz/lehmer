@@ -3,11 +3,11 @@ mod bit_string;
 use bit_string::BitString;
 
 pub struct Lehmer {
-    pub code: Vec<u64>,
+    pub code: Vec<u8>,
 }
 
 impl Lehmer {
-    pub fn from_permutation(mut vec: Vec<u64>) -> Self {
+    pub fn from_permutation(mut vec: Vec<u8>) -> Self {
         let mut bit_string = BitString::new();
 
         for k in &mut vec {
@@ -19,7 +19,7 @@ impl Lehmer {
     }
 
     pub fn from_decimal(decimal: u64, n: usize) -> Self {
-        let mut code: Vec<u64> = Vec::with_capacity(n);
+        let mut code: Vec<u8> = Vec::with_capacity(n);
         code.resize(n, 0);
 
         let mut product: u64 = 1;
@@ -32,15 +32,15 @@ impl Lehmer {
             let divisor = decimal / product;
             let remainder = divisor % iteration;
 
-            code[index] = remainder;
+            code[index] = remainder as u8;
         }
 
         Self { code }
     }
 
-    pub fn to_permutation(mut self) -> Vec<u64> {
-        let n = self.code.len() as u64;
-        let mut sequence: Vec<u64> = (0..n).collect();
+    pub fn to_permutation(mut self) -> Vec<u8> {
+        let n = self.code.len() as u8;
+        let mut sequence: Vec<u8> = (0..n).collect();
 
         for d in &mut self.code {
             *d = sequence.remove(*d as usize);
@@ -55,7 +55,7 @@ impl Lehmer {
 
         for (i, d) in self.code.iter().rev().enumerate().skip(1) {
             product *= i as u64;
-            decimal += d * product;
+            decimal += *d as u64 * product;
         }
 
         decimal

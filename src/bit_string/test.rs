@@ -25,15 +25,15 @@ mod set {
         subject.set(2);
         assert_eq!(5, subject.b);
 
-        subject.set(63);
-        assert_eq!(9223372036854775813, subject.b);
+        subject.set(31);
+        assert_eq!(2147483653, subject.b);
     }
 
     #[test]
     #[should_panic]
     fn it_panics_if_n_is_out_of_bounds() {
         let mut subject = Subject::new();
-        subject.set(64);
+        subject.set(32);
     }
 }
 
@@ -52,13 +52,13 @@ mod count_until {
         assert_eq!(subject.count_until(2), 1);
         assert_eq!(subject.count_until(3), 1);
         assert_eq!(subject.count_until(4), 2);
-        assert_eq!(subject.count_until(64), 2);
+        assert_eq!(subject.count_until(32), 2);
     }
 
     #[test]
     #[should_panic]
     fn it_panics_if_n_is_out_of_bounds() {
         let subject = Subject::new();
-        subject.count_until(65);
+        subject.count_until(33);
     }
 }
