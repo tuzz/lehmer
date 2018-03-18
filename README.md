@@ -13,8 +13,8 @@ and as a result, doesn't do any error handling.
 
 This implementation is based on the 'Mapping Permutations to Integers' section
 of [this paper](https://www.cs.helsinki.fi/u/bmmalone/heuristic-search-fall-2013/Korf2008.pdf).
-It doesn't currently implement the linear time speedup for the reverse mapping.
-This requires a lookup table to be precomputed and complicates things a bit.
+It doesn't implement the linear time speedup as the speed gains are only ~10%
+and require precomputing a lookup table.
 
 ### Usage
 
@@ -37,33 +37,29 @@ fn main() {
     assert_eq!(vec![1, 0, 4, 3, 2], another.to_permutation());
 
     // Compute the maximum decimal value for a permutation of five elements
-    let max = Lehmer::max_value(5)
+    let max = Lehmer::max_value(5);
     assert_eq!(119, max);
 }
 ```
 
-Lehmer supports permutations up to 21 elements in length whose decimal
-representations are less than or equal to `<u64>::max_value()`. Rust will
-`panic` for larger values.
+Lehmer supports permutations up to 20 elements in length. The behaviour is not
+specified for permutations longer than this and will likely cause a panic. No
+unsafe operations are used, though.
 
 Additionally, permutations must be vectors containing sequential integers
 starting from 0 (in any order), e.g. `[1, 0, 4, 3, 2]`. Lehmer will either
 `panic` or produce incorrect results for other vectors.
-
-Note: The above conditions still mean Lehmer is safe as per Rust's definitions.
-It doesn't use any `unsafe` features and memory remains consistent in the case
-of a `panic`.
 
 ### Benchmarks
 
 Benchmarks can be run with `cargo bench`:
 
 ```
-test benchmark_from_decimal     ... bench:         263 ns/iter (+/- 7)
-test benchmark_from_permutation ... bench:          77 ns/iter (+/- 2)
-test benchmark_max_value        ... bench:          13 ns/iter (+/- 2)
-test benchmark_to_decimal       ... bench:          42 ns/iter (+/- 5)
-test benchmark_to_permutation   ... bench:         137 ns/iter (+/- 9)
+test benchmark_from_decimal     ... bench:         264 ns/iter (+/- 10)
+test benchmark_from_permutation ... bench:          83 ns/iter (+/- 9)
+test benchmark_max_value        ... bench:          13 ns/iter (+/- 1)
+test benchmark_to_decimal       ... bench:          40 ns/iter (+/- 2)
+test benchmark_to_permutation   ... bench:         142 ns/iter (+/- 9)
 ```
 
 e.g. `Lehmer::from_permutation` runs at ~13 million iterations per second.
