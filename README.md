@@ -25,7 +25,7 @@ use lehmer::Lehmer;
 
 fn main() {
     // Compute the Lehmer code for a permutation:
-    let lehmer = Lehmer::from_permutation(vec![1, 0, 4, 3, 2]);
+    let lehmer = Lehmer::from_permutation(&[1, 0, 4, 3, 2]);
 
     assert_eq!(vec![1, 0, 2, 1, 0], lehmer.code);
     assert_eq!(29, lehmer.to_decimal());

@@ -5,9 +5,10 @@ use bencher::Bencher;
 use lehmer::Lehmer;
 
 fn benchmark_from_permutation(bench: &mut Bencher) {
+    let slice = &[7, 15, 0, 1, 2, 6, 3, 12, 5, 14, 8, 11, 9, 4, 13, 10];
+
     bench.iter(|| {
-        let vec = vec![7, 15, 0, 1, 2, 6, 3, 12, 5, 14, 8, 11, 9, 4, 13, 10];
-        Lehmer::from_permutation(vec);
+        Lehmer::from_permutation(slice);
     })
 }
 

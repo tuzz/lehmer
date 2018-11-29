@@ -7,25 +7,25 @@ pub struct Lehmer {
 }
 
 impl Lehmer {
-    pub fn from_permutation(mut vec: Vec<u8>) -> Self {
+    pub fn from_permutation(slice: &[u8]) -> Self {
         let mut bit_string = BitString::new();
 
-        for k in &mut vec {
+        let code = slice.iter().map(|k| {
             bit_string.set(*k);
-            *k -= bit_string.count_until(*k);
-        }
+            *k - bit_string.count_until(*k)
+        }).collect();
 
-        Self { code: vec }
+        Self { code }
     }
 
-    pub fn from_decimal(decimal: u64, n: usize) -> Self {
+    pub fn from_decimal(decimal: usize, n: usize) -> Self {
         let mut code: Vec<u8> = Vec::with_capacity(n);
         code.resize(n, 0);
 
-        let mut product: u64 = 1;
-        let mut iteration: u64 = 1;
+        let mut product: usize = 1;
+        let mut iteration: usize = 1;
 
-        for index in (0..n-1).rev() {
+        for index in (0..n.saturating_sub(1)).rev() {
             product *= iteration;
             iteration += 1;
 
@@ -49,23 +49,23 @@ impl Lehmer {
         self.code
     }
 
-    pub fn to_decimal(self) -> u64 {
-        let mut product: u64 = 1;
-        let mut decimal: u64 = 0;
+    pub fn to_decimal(self) -> usize {
+        let mut product: usize = 1;
+        let mut decimal: usize = 0;
 
         for (i, d) in self.code.iter().rev().enumerate().skip(1) {
-            product *= i as u64;
-            decimal += *d as u64 * product;
+            product *= i as usize;
+            decimal += *d as usize * product;
         }
 
         decimal
     }
 
-    pub fn max_value(n: usize) -> u64 {
-        let mut product: u64 = 1;
+    pub fn max_value(n: usize) -> usize {
+        let mut product: usize = 1;
 
         for i in (0..n+1).skip(1) {
-            product *= i as u64;
+            product *= i as usize;
         }
 
         product - 1

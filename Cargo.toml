@@ -1,7 +1,7 @@
 [package]
 name = "lehmer"
 description = "Convert between permutation vectors, Lehmer codes and decimals."
-version = "2.0.0"
+version = "3.0.0"
 authors = ["Chris Patuzzo <chris@patuzzo.co.uk>"]
 documentation = "https://github.com/tuzz/lehmer"
 homepage = "https://github.com/tuzz/lehmer"
